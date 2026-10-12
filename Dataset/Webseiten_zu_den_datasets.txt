@@ -1,0 +1,11 @@
+Datensätze von Menschen mit und ohne Makeup
+---------------------------------------------
+Huggingface
+------------
+- https://huggingface.co/datasets/cyberagent/FFHQ-Makeup/tree/main
+- https://huggingface.co/datasets/UniqueData/makeup-detection-dataset/tree/main
+
+Kaggle
+-------
+https://www.kaggle.com/datasets/tapakah68/makeup-detection-dataset
+
