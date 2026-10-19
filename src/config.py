@@ -15,6 +15,6 @@ DATA_DIR_cyberagent_H1_all = DATA_DIR / "cyberagent_H1/FFHQ-Makeup/FFHQ-Makeup"
 DATA_DIR_cyberagent_H1_test = DATA_DIR / "cyberagent_H1/FFHQ-Makeup/images"
 
 
-# Kaggle - 26 Datenpunkte -> daher nur zum Validieren nutzen!!!
+# Kaggle - 26 Datenpunkte -> daher nur zum Validieren oder zum Testen nutzen!!!
 DATA_DIR_tapakah68_K1 = DATA_DIR / "tapakah68_K1"
 
