@@ -3,7 +3,14 @@ Datensätze von Menschen mit und ohne Makeup
 Huggingface
 ------------
 - https://huggingface.co/datasets/cyberagent/FFHQ-Makeup/tree/main [cyberagent_H1]
-- https://huggingface.co/datasets/UniqueData/makeup-detection-dataset/tree/main [uniqueData_H2]
+- https://huggingface.co/datasets/UniqueData/makeup-detection-dataset/tree/main [uniqueData_H2] 
+
+Wichtige Anmerkung zu uniqueData_H2:
+Die Dateien no_makeup.tar.gz und with_makeup.tar.gz lassen sich nicht entpacken. 
+Aus diesem Grund werden diese Daten für die weiteren Analysen und das spätere Vorgehen nicht berücksichtigt.
+Darüber hinaus sind die 25 Datenpunkte aufgrund der geringen Menge vernachlässigbar.
+
+
 
 Kaggle
 -------
