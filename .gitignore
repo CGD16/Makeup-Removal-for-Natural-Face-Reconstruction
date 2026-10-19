@@ -5,9 +5,10 @@
 *.cbm
 *.csv
 *.json
-*.txt
 *.tar.gz
+
 .cache
+
 images/
 Models/
 Results/
