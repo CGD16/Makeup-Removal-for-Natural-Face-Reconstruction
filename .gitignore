@@ -12,3 +12,5 @@
 images/
 Models/
 Results/
+
+__pycache__/
