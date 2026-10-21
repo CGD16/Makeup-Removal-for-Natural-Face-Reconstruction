@@ -1,44 +1,51 @@
 import cv2
+import os
+import numpy as np
 from mtcnn import MTCNN
-from mtcnn.utils.plotting import plot
 from keras_facenet import FaceNet
-import matplotlib.pyplot as plt
 
-# Load the image
-image = cv2.imread("C:/Users/doron/Bilder/kim_is_calling.png")
+def align_face():
+    folder_path = "C:/Users/doron/Bilder/test"
 
-# set BGR -> RGB for plotter
-image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
+    # List to hold the cropped faces
+    faces_list = []
 
-# Initialize MTCNN detector and FaceNet extractor
-mtcnn = MTCNN(device="CPU:0")
-embedder = FaceNet()
+    # Initialize MTCNN detector and FaceNet extractor
+    mtcnn = MTCNN(device="CPU:0")
+    embedder = FaceNet()
 
-# Detect faces and landmarks
-detection = mtcnn.detect_faces(image, threshold_onet=0.85)
+    for filename in os.listdir(folder_path):
+        
+        image_path = os.path.join(folder_path, filename)
+        
+        # Load the image
+        image = cv2.imread(image_path)
 
-if detections:
-    # Extract the bounding box of the first detected face
-    x, y, w, h = detections[0]['box']
-    
-    # Ensure coordinates don't fall outside the image boundaries
-    x1, y1 = max(0, x), max(0, y) 
-    
-    # Crop the face from the RGB image
-    face_crop = image_rgb[y1:y1+h, x1:x1+w]
-    
-    # FaceNet requires a standard input size of 160x160 pixels
-    face_resized = cv2.resize(face_crop, (160, 160))
-    
-    # Generate the embedding (convert single image to a batch of 1 using expand_dims)
-    embedding = embedder.embeddings(np.expand_dims(face_resized, axis=0))
-    
-    print(f"Success! Generated an embedding vector of shape: {embedding.shape}")
-    # Print the first few numbers to verify it worked
-    print(f"First 5 embedding values: {embedding[0][:5]}")
-else:
-    print("No faces detected in the image.")
+        # set BGR -> RGB for plotter
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
 
-# Plot the results
-plt.imshow(plot(image_rgb, detection))
-plt.show()
+        # Detect faces and landmarks
+        detection = mtcnn.detect_faces(image, threshold_onet=0.85)
+
+        if detections:
+            # Get bounding box of the detected face
+            x, y, w, h = detection[0]['box']
+            x1, y1 = max(0, x), max(0, y)
+            
+            # Crop and resize
+            face_crop = image_rgb[y1:y1+h, x1:x1+w]
+            face_resized = cv2.resize(face_crop, (160, 160))
+            
+            # Add to list
+            faces_list.append(face_resized)
+        else:
+            print("No faces detected in the image.")
+
+    # Convert list of images to a real 4D batch array (N, 160, 160, 3)
+    faces_array = np.array(faces_list)
+
+    # Generate embeddings for all faces in one call (no expand_dims)
+    embeddings = embedder.embeddings(faces_array)
+
+if __name__ == "__main__":
+    align_face()
